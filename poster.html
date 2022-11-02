@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard-dynamic-subset.css" />
+	<title></title>
+	<style>
+		* {
+			box-sizing: border-box;
+			font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+		}
+
+		html, body {
+			margin: 0;
+			padding: 0;
+		}
+
+		.grid-container {
+			display: grid;
+			grid-template-columns: auto auto auto;
+
+			width: calc(100vh / 4 * 3);
+			height: 100vh;
+			/*border:  1px solid grey;*/
+
+			position: absolute;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+
+		.grid-item {
+			width: calc(100vh / 4);
+			height: calc(100vh / 4);
+			/*border:  1px solid grey;*/
+
+			position:  relative;
+		}
+
+		header {
+			width: 50vh;
+
+			position: absolute;
+			left: 0;
+			bottom:  0;
+		}
+
+		header, footer {
+			font-size:  4em;
+			font-weight: 700;
+			color: lightgray;
+		}
+
+		footer {
+			width: 50vh;
+		}
+
+		#layer1 {
+			z-index: 10;
+		}
+
+		#layer1 {
+			z-index: 100;
+		}
+
+		#stranger {
+			width: 25vh;
+			height: 25vh;
+			background-color:  red;
+
+			position: absolute;
+			top:  12.5vh;
+			z-index: 1579;
+
+			clip-path: polygon(50% 0%, 100% 0, 100% 60%, 100% 100%, 0 100%, 0% 60%, 0 0);
+
+			cursor: pointer;
+		}
+
+		.wither {
+			animation-name: denting, darkeningRed;
+			animation-duration: 0.5s;
+			animation-fill-mode: forwards;
+		}
+
+		/*#stranger:active {
+			clip-path: polygon(37% 41%, 90% 20%, 45% 56%, 85% 50%, 2% 96%, 29% 56%, 10% 20%);
+		}*/
+
+		@keyframes denting {
+			from {
+				clip-path: polygon(50% 0%, 100% 0, 100% 60%, 100% 100%, 0 100%, 0% 60%, 0 0);
+			}
+			to {
+				clip-path: polygon(37% 41%, 90% 20%, 45% 56%, 85% 50%, 2% 96%, 29% 56%, 10% 20%);
+			}
+		}
+
+		@keyframes darkeningRed {
+			from {
+				background-color: red;
+			}
+			to {
+				background-color: #c20000
+			}
+		}
+
+		.highlight {
+			color: black;
+		}
+	</style>
+</head>
+<body>
+	<div class="grid-container" id="layer1">
+		<div class="grid-item"></div>
+	  <div class="grid-item">
+	  	<header>
+	  		어떤 만남과
+	  		<span id="stranger-text">이방인</span>
+  		</header>
+	  </div>
+	  <div class="grid-item"></div>
+	  <div class="grid-item">
+	  </div>
+	  <div class="grid-item">
+	  	<div id="stranger"></div>
+	  </div>
+	  <div class="grid-item"></div>
+	  <div class="grid-item"></div>
+	  <div class="grid-item"></div>
+	  <div class="grid-item"></div>
+	  <div class="grid-item"></div>
+	  <div class="grid-item"></div>
+	  <div class="grid-item"></div>
+	</div>
+
+	<div class="grid-container" id="layer2">
+		<div class="grid-item"></div>
+	  <div class="grid-item"></div>
+	  <div class="grid-item"></div>
+	  <div class="grid-item"></div>
+	  <div class="grid-item"></div>
+	  <div class="grid-item"></div>
+	  <div class="grid-item"></div>
+	  <div class="grid-item"></div>
+	  <div class="grid-item"></div>
+	  <div class="grid-item"></div>
+	  <div class="grid-item">
+	  	<footer>
+	  		그리고 유대
+	  	</footer>
+	  </div>
+	  <div class="grid-item"></div>
+	</div>
+
+	<script>
+		const CLIP_PATHS_POLYGON = [
+			"polygon(50% 0%, 100% 0, 100% 60%, 100% 100%, 0 100%, 0% 60%, 0 0)",
+			"polygon(37% 41%, 90% 20%, 45% 56%, 85% 50%, 2% 96%, 29% 56%, 10% 20%)",
+			"polygon(81% 65%, 25% 88%, 94% 11%, 38% 17%, 10% 52%, 77% 86%, 15% 20%)",
+			"polygon(100% 100%, 26% 0, 98% 20%, 71% 100%, 0 100%, 100% 47%, 0 0)",
+			"polygon(97% 88%, 0 100%, 38% 0, 63% 49%, 0 100%, 82% 58%, 45% 100%)"
+		];
+
+		const stranger = document.getElementById("stranger");
+		const starangerText = document.getElementById("stranger-text");
+
+		stranger.addEventListener('click', (e) => {
+			e.target.animate(
+				[
+					{
+						clipPath: CLIP_PATHS_POLYGON[0]
+					},
+					{
+						clipPath: CLIP_PATHS_POLYGON[1]
+					}
+				],
+				{
+					duration: 500,
+					easing: "ease-in-out",
+					fill: "forwards"
+				}
+			);
+
+			new Promise((resolve) => {
+				const duration = 130;
+
+				setTimeout(() => {
+					e.target.animate(
+						[
+							{
+								clipPath: CLIP_PATHS_POLYGON[1]
+							},
+							{
+								clipPath: CLIP_PATHS_POLYGON[2]
+							}
+						],
+						{
+							duration,
+							easing: "ease-in-out",
+							fill: "forwards"
+						}
+					);
+
+					resolve(duration);
+				}, 1000);
+			}).then((waitFor) => {
+				const duration = 280;
+
+				return new Promise((resolve) => {
+					setTimeout(() => {
+						e.target.animate(
+							[
+								{
+									clipPath: CLIP_PATHS_POLYGON[2]
+								},
+								{
+									clipPath: CLIP_PATHS_POLYGON[3]
+								}
+							],
+							{
+								duration,
+								easing: "ease-in-out",
+								fill: "forwards"
+							}
+						);
+
+						resolve(duration);
+					}, waitFor);
+				});
+			}).then((waitFor) => {
+				return new Promise((resolve) => {
+					setTimeout(() => {
+						e.target.animate(
+							[
+								{
+									background: "linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(101,0,0,1) 40%, rgba(255,0,0,1) 100%)",
+									backgroundSize: "100% 4000%",
+									backgroundPosition: "0 100%"
+								},
+								{
+									background: "linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(101,0,0,1) 40%, rgba(255,0,0,1) 100%)",
+									backgroundSize: "100% 4000%",
+									backgroundPosition: "0 0%"
+								}
+							],
+							{
+								duration: 890,
+								easing: "linear",
+								fill: "forwards",
+								delay: 800
+							}
+						);
+					}, waitFor);
+				});
+			});
+
+			starangerText.classList.add("highlight");
+		});
+	</script>
+</body>
+</html>
