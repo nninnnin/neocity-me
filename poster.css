@@ -1,0 +1,162 @@
+/* poster.css */
+
+* {
+	box-sizing: border-box;
+	font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  word-break: keep-all;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+
+	overflow: hidden;
+
+	background-color: black;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a:visited {
+	color: inherit;
+}
+
+.poster-container {
+	background-color: white;
+
+	z-index: 5;
+	width: calc(100vh / 4 * 3);
+	height: 100vh;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: auto auto auto;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.grid-item {
+	width: calc(100vh / 4);
+	height: calc(100vh / 4);
+	/*border:  1px solid grey;*/
+
+	position:  relative;
+}
+
+#layer1 {
+	z-index: 10;
+}
+
+#layer2 {
+	z-index: 50;
+}
+
+#layer3 {
+	z-index: 100;
+}
+
+.remote-controller {
+	position: fixed;
+	top: 2.5%;
+	right: 1.5%;
+	z-index: 9999;
+
+	display: flex;
+	flex-direction: column;
+
+	cursor: default;
+}
+
+.remote-controller > button {
+	width: 16px;
+	height: 16px;
+	background-color: lightgray;
+	border: 0;
+	border-radius: 50%;
+	outline: 0;
+	cursor: pointer;
+
+	margin-bottom: 30%;
+}
+
+.remote-controller > button.active {
+	background-color: white;
+}
+
+header, footer {
+	font-size: 10vh;
+	font-weight: 700;
+	color: lightgray;
+}
+
+
+header {
+	width: 50vh;
+
+	position: absolute;
+	right: 0;
+	bottom:  0;
+
+	text-align: right;
+}
+
+footer {
+	width: 50vh;
+}
+
+#stranger {
+	width: 25vh;
+	height: 25vh;
+	background-color: red;
+
+	position: absolute;
+	top: 12.5vh;
+	left: -25vh;
+	z-index: 1500;
+
+	clip-path: polygon(50% 0%, 100% 0, 100% 60%, 100% 100%, 0 100%, 0% 60%, 0 0);
+
+	cursor: pointer;
+}
+
+.wither {
+	animation-name: denting, darkeningRed;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes denting {
+	from {
+		clip-path: polygon(50% 0%, 100% 0, 100% 60%, 100% 100%, 0 100%, 0% 60%, 0 0);
+	}
+	to {
+		clip-path: polygon(37% 41%, 90% 20%, 45% 56%, 85% 50%, 2% 96%, 29% 56%, 10% 20%);
+	}
+}
+
+@keyframes darkeningRed {
+	from {
+		background-color: red;
+	}
+	to {
+		background-color: #c20000
+	}
+}
+
+.highlight {
+	color: black;
+}
+
+.hidden {
+	visibility: hidden;
+}

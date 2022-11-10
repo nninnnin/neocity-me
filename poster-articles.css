@@ -1,0 +1,46 @@
+/* poster-articles.css */
+
+.article-container {
+	width: calc(100vw - (100vh / 4 * 3));
+	height: 100vh;
+	background-color: black;
+	color: black;
+
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 5;
+
+	transition: opacity color background-color 0.5s;
+
+	opacity: 1;
+
+	display: grid;
+}
+
+.article-container > .grid-item {
+	width: calc(100vw - (100vh / 4 * 3));
+}
+
+article {
+	font-size: calc(5vh);
+	padding: 0 32px 0 32px;
+}
+
+article:nth-child(2) {
+	/*background-color: lightgray;*/
+
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+@media only screen and (max-width: 936px) {
+	.article-container {
+		opacity: 0;
+	}	
+}
+
+.enlighten {
+	color: white;
+}
