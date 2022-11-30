@@ -1,41 +1,57 @@
 const introParagraph = document.getElementById("intro-paragraph");
 
-const introTexts = introParagraph.textContent.trim();
+function animateIntroParagraph(introParagraph) {
+  const introTexts = introParagraph.textContent.trim();
 
-const splited = introTexts.split("").filter((text, index, texts) => {
-  const next = texts[index + 1];
+  const splited = introTexts.split("").filter((text, index, texts) => {
+    const next = texts[index + 1];
 
-  const regex = /^\s*$/;
+    const regex = /^\s*$/;
 
-  if (regex.test(text) && regex.test(next)) {
-    return false;
-  }
+    if (regex.test(text) && regex.test(next)) {
+      return false;
+    }
 
-  return true;
-});
+    return true;
+  });
 
-const wrapped = splited.map((text, index) => {
-  const span = document.createElement("span");
-  span.classList.add("circling");
-  span.innerHTML = text;
+  const wrapped = splited.map((text, index) => {
+    const span = document.createElement("span");
+    span.classList.add("circling");
+    span.innerHTML = text;
 
-  let rate = 0.5;
+    let ROTATE_DEG = 0;
+    let DIAMETER = 10;
+    const LETTER_SPACING = 10.5;
+    const AMOUNT_OF_CHANGE = 0.13;
 
-  setInterval(() => {
-    rate += 0.013;
     span.style.transform = `rotate(${
-      (index + 1) * 9.5 + rate * 10
-    }deg) translate(-10%, -10%)`;
-  }, 1);
+      (index + 1) * LETTER_SPACING + ROTATE_DEG
+    }deg) translate(-10%, -${DIAMETER}%)`;
 
-  rate += 0.013;
-  span.style.transform = `rotate(${
-    (index + 1) * 9.5 + rate * 10
-  }deg) translate(-10%, -10%)`;
+    setInterval(() => {
+      ROTATE_DEG += AMOUNT_OF_CHANGE;
+      DIAMETER += AMOUNT_OF_CHANGE;
+      span.style.transform = `rotate(${
+        (index + 1) * LETTER_SPACING + ROTATE_DEG
+      }deg) translate(-10%, -${DIAMETER}%)`;
+    }, 1);
 
-  introParagraph.appendChild(span);
+    introParagraph.appendChild(span);
 
-  return span;
-});
+    return span;
+  });
+}
 
-console.log(wrapped);
+function fadeInIntroParagraph(introParagraph) {
+  const span = introParagraph.querySelector("span");
+
+  span.style.opacity = 1;
+  span.style.pointerEvents = "initial";
+}
+
+animateIntroParagraph(introParagraph);
+
+setTimeout(() => {
+  fadeInIntroParagraph(introParagraph);
+}, 3000);

@@ -58,16 +58,30 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
 
-  font: 26px Monaco, MonoSpace;
+  font: Monaco, MonoSpace;
+  font-size: 2vw;
 }
 
 #intro-paragraph span {
   color: #3a3a3a;
+  transition: 1s;
+  opacity: 0;
+  pointer-events: none;
 }
 
 #intro-paragraph a {
   position: relative;
   z-index: 9876;
+}
+
+.circling {
+  height: 10vh;
+  /* position: absolute; */
+  width: 20px;
+
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  opacity: 1 !important;
 }
 
 @keyframes rotate {
@@ -84,15 +98,6 @@ body {
   animation: rotate 5s;
   animation-fill-mode: forwards;
 } */
-
-.circling {
-  height: 200px;
-  /* position: absolute; */
-  width: 20px;
-
-  transform: translate(-50%, -50%);
-  transform-origin: bottom center;
-}
 
 #we {
   position: fixed;
